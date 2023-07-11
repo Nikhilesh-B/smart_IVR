@@ -63,5 +63,6 @@ if __name__ == "__main__":
                      "content":"Don't make assumptions about what values to plug into functions. Ask for clarification if a user request is ambiguous."})
     messages.append({"role":"user", "content":CONVERSATION})
     response = chat_completion_request(messages, functions=functions)
+    print(response.json())
     assistant_message = response.json()["choices"][0]["message"]
     print("assistant message", assistant_message)
