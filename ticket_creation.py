@@ -55,7 +55,7 @@ def pretty_print_conversation(messages):
                 role_to_color[messages[formatted_messages.index(formatted_message)]["role"]],
             )
         )
-
+from pprint import pprint
 
 if __name__ == "__main__":
     messages = []
@@ -65,4 +65,6 @@ if __name__ == "__main__":
     response = chat_completion_request(messages, functions=functions)
     print(response.json())
     assistant_message = response.json()["choices"][0]["message"]
-    print("assistant message", assistant_message)
+    print("assistant message")
+    assistant_message = json(assistant_message)
+    pprint(assistant_message)
