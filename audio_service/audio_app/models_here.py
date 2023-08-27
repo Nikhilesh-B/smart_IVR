@@ -30,7 +30,7 @@ class Call_Processor():
                                 "description": "A summary of the main topic of the converation",
                             },
                             "resolved":{
-                                "type":"boolean",
+                                "type":"string",
                                 "description": "Whether the agent was able to provide an end to end resolution of the customer's problem"
                             },
                             },
@@ -61,13 +61,3 @@ class Call_Processor():
             print("Unable to generate ChatCompletion response")
             print(f"Exception: {e}")
             return e
-        
-class Transcriber():
-    def __init__(self) -> None:
-        self.API_URL = "https://sanchit-gandhi-whisper-jax.hf.space/"
-        self.client = Client(self.API_URL)
-
-    def transcribe_audio(self, audio_path, return_timestamps=False):
-        task = "transcription"
-        text, runtime = self.client.predict(audio_path,task,return_timestamps,api_name='/predict_1')
-        return text
