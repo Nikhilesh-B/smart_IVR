@@ -4,7 +4,7 @@ import requests
 import os
 import json
 
-AUDIOFILE = "./audio_examples/bad_call.mp3"
+AUDIOFILE = os.getcwd() + "/testing/audio_examples/bad_call.mp3"
 
 with open(AUDIOFILE, 'rb') as audio_file:
     audio_data = audio_file.read()
