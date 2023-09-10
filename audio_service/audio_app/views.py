@@ -16,9 +16,10 @@ def index(request):
 def on_connect():
     print("I'm connected!")
 
-@sio.on('update_form')
 def update_form(form_data):
     form_data["lock"] = False
+    print("update_form")
+    print(form_data)
     sio.emit('formSubmit', form_data)
 
 @sio.on('disconnect')
@@ -29,8 +30,9 @@ def generate_fields(text):
     chat = Call_Processor()
     messages = {"role":"user", "content":text}
     res = json.loads(chat.chat_completion_request([messages], chat.functions).content)
+    print(res)
     ticket_json = res["choices"][0]["message"]["function_call"]
-
+    ticket_json = json.loads(ticket_json["arguments"])
     sio.connect("http://localhost:3001")
     update_form(ticket_json)
     sio.disconnect()
@@ -49,7 +51,7 @@ def transcribe_audio(request):
         response = requests.post(url=url, json=payload)
 
         json_out = {'status': 'success'}
-        json_out.update(generate_fields(response.text))
+        generate_fields(response.text)
 
         return JsonResponse(json_out)
 

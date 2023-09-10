@@ -1,7 +1,6 @@
 from django.db import models
 import openai, requests
 from tenacity import retry, wait_random_exponential, stop_after_attempt
-from termcolor import colored
 import audio_app.secrets as secrets
 
 openai.api_key = secrets.gpt_api_key
@@ -29,7 +28,7 @@ class Call_Processor():
                                 "description": "A summary of the main topic of the converation",
                             },
                             "resolved":{
-                                "type":"string",
+                                "type":"boolean",
                                 "description": "Whether the agent was able to provide an end to end resolution of the customer's problem"
                             },
                             },
