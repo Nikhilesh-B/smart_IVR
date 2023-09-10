@@ -3,8 +3,6 @@ import openai, requests
 from tenacity import retry, wait_random_exponential, stop_after_attempt
 from termcolor import colored
 import audio_app.secrets as secrets
-from gradio_client import Client
-
 
 openai.api_key = secrets.gpt_api_key
 GPT_MODEL = "gpt-3.5-turbo-0613"
@@ -18,15 +16,15 @@ class Call_Processor():
                     "parameters":{
                         "type": "object",
                         "properties" :{
-                            "customer_name":{
+                            "firstName":{
                                 "type":"string",
-                                "description": "The first name and last name of the customer",
+                                "description": "The first name of the customer",
                             },
-                            "agent_name":{
+                            "lastName":{
                                 "type":"string",
-                                "description": "The first name and last name of the agent helping the customer",
+                                "description": "The last name of the customer",
                             },
-                            "summary":{
+                            "description":{
                                 "type":"string",
                                 "description": "A summary of the main topic of the converation",
                             },
@@ -62,3 +60,4 @@ class Call_Processor():
             print("Unable to generate ChatCompletion response")
             print(f"Exception: {e}")
             return e
+

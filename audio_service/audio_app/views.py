@@ -4,20 +4,36 @@ from django.views.decorators.csrf import csrf_exempt
 import json 
 import requests
 from audio_app.models import Call_Processor
+import socketio
 
 # Create your views here.
+sio = socketio.Client()
 
 def index(request):
     return HttpResponse("Hello world.")
+    
+@sio.on('connect')
+def on_connect():
+    print("I'm connected!")
 
+@sio.on('update_form')
+def update_form(form_data):
+    form_data["lock"] = False
+    sio.emit('formSubmit', form_data)
+
+@sio.on('disconnect')
+def on_disconnect():
+    print("I'm disconnected!")
 
 def generate_fields(text):
     chat = Call_Processor()
     messages = {"role":"user", "content":text}
     res = json.loads(chat.chat_completion_request([messages], chat.functions).content)
+    ticket_json = res["choices"][0]["message"]["function_call"]
 
-    return res["choices"][0]["message"]["function_call"]
-
+    sio.connect("http://localhost:3001")
+    update_form(ticket_json)
+    sio.disconnect()
 
 @csrf_exempt
 def transcribe_audio(request):

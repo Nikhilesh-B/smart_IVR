@@ -5,7 +5,7 @@ audio_service/audio_app/audio_service/__pycache__/
 audio_service/db.sqlite3
 testing/Archive/
 testing/__pycache__/
-
+.DS_Store
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
