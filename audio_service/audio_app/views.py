@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
+from django.views import View
+from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt 
 import json 
 import requests
@@ -15,15 +16,22 @@ form_data = None
 def index(request):
     return HttpResponse("Hello world.")
 
+
+class ServeAudio(View):
+    def get(self, request, *args, **kwargs):
+        audio_file_path = "/Users/nikhileshbelulkar/Documents/smart_IVR/testing/audio_examples/supportify.mp3"
+        return FileResponse(open(audio_file_path, 'rb'), content_type='audio/mpeg')
+
 @csrf_exempt
 def voice(request):
     """Respond to incoming phone calls with a 'Hello world' message"""
     if request.method == 'POST' or request.method == 'GET':
         # Start our TwiML response
-        resp = VoiceResponse()
         # Read a message aloud to the caller
-        resp.say("Hello world!")
+        resp = VoiceResponse()
+        resp.play("https://6ed0-2600-4040-56c4-9e00-1c3b-216f-8d0e-5b0f.ngrok-free.app/audio_app/supportify.mp3")
         return HttpResponse(str(resp))
+    
 
 @sio.on('connect')
 def on_connect():
