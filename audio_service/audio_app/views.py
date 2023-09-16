@@ -5,6 +5,8 @@ import json
 import requests
 from audio_app.models import Call_Processor
 import socketio
+from twilio.twiml.voice_response import VoiceResponse
+
 
 # Create your views here.
 sio = socketio.Client()
@@ -12,7 +14,17 @@ form_data = None
 
 def index(request):
     return HttpResponse("Hello world.")
-    
+
+@csrf_exempt
+def voice(request):
+    """Respond to incoming phone calls with a 'Hello world' message"""
+    if request.METHOD == 'GET':
+        # Start our TwiML response
+        resp = VoiceResponse()
+        # Read a message aloud to the caller
+        resp.say("Hello world!")
+        return str(resp)
+
 @sio.on('connect')
 def on_connect():
     update_form()
@@ -60,3 +72,4 @@ def transcribe_audio(request):
 
     else:
         return JsonResponse({'status': 'failed', 'message': 'Only POST method is allowed'}, status=405)
+    
