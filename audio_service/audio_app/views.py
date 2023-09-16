@@ -18,12 +18,12 @@ def index(request):
 @csrf_exempt
 def voice(request):
     """Respond to incoming phone calls with a 'Hello world' message"""
-    if request.METHOD == 'GET':
+    if request.method == 'POST' or request.method == 'GET':
         # Start our TwiML response
         resp = VoiceResponse()
         # Read a message aloud to the caller
         resp.say("Hello world!")
-        return str(resp)
+        return HttpResponse(str(resp))
 
 @sio.on('connect')
 def on_connect():
