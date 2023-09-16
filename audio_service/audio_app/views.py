@@ -8,15 +8,18 @@ import socketio
 
 # Create your views here.
 sio = socketio.Client()
+form_data = None
 
 def index(request):
     return HttpResponse("Hello world.")
     
 @sio.on('connect')
 def on_connect():
+    update_form()
     print("I'm connected!")
 
-def update_form(form_data):
+def update_form():
+    global form_data
     form_data["lock"] = False
     print("update_form")
     print(form_data)
@@ -27,14 +30,14 @@ def on_disconnect():
     print("I'm disconnected!")
 
 def generate_fields(text):
+    global form_data
     chat = Call_Processor()
     messages = {"role":"user", "content":text}
     res = json.loads(chat.chat_completion_request([messages], chat.functions).content)
     print(res)
     ticket_json = res["choices"][0]["message"]["function_call"]
-    ticket_json = json.loads(ticket_json["arguments"])
+    form_data = json.loads(ticket_json["arguments"])
     sio.connect("http://localhost:3001")
-    update_form(ticket_json)
     sio.disconnect()
 
 @csrf_exempt
