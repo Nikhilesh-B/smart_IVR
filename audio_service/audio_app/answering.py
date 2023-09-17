@@ -1,8 +1,8 @@
 import pandas as pd
 from scipy import spatial
 import openai
-from .. import secrets
 import os 
+import audio_app.secrets as secrets
 
 openai.api_key = os.getenv(secrets.gpt_api_key)
 
@@ -54,8 +54,8 @@ class AnsweringAgent():
         return response_message
 
 if __name__ == "__main__":
-    query = 'Hey. I have a query about a mozzarella pizza. How much would a mozzerela pizza cost?'
     agent = AnsweringAgent()
+    query = 'Hey. I have a query about a mozzarella pizza. How much would a mozzerela pizza cost?'
     response = agent.ask(query=query)
     print("Agent response:")
     print(response)

@@ -1,7 +1,7 @@
 import openai
 import os 
-from .. import secrets
 import pandas as pd
+import audio_app.secrets as secrets
 
 openai.api_key = os.getenv(secrets.gpt_api_key)
 
