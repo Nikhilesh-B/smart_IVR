@@ -1,6 +1,3 @@
-Of course! Here's the README for `SMART_IVR`:
-
----
 
 ### **SMART_IVR**
 
