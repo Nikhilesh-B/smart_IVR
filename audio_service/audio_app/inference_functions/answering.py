@@ -52,7 +52,6 @@ class AnsweringAgent():
         )
         response_message = response["choices"][0]["message"]["content"]
         return response_message
-    
 
 if __name__ == "__main__":
     query = 'Hey. I have a query about a mozzarella pizza. How much would a mozzerela pizza cost?'
