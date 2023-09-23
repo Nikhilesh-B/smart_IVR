@@ -34,8 +34,9 @@ if __name__ == "__main__":
     question = input("Please input your query about Nikhilesh's restaruant")
     data_table = get_embeddings()
     zipped_embeddings = strings_ranked_by_relatedness(question, data_table)
-    print(zipped_embeddings[:10])
-
+    for tup in zipped_embeddings[0:10]:
+        print(tup[2])
+    
 
 
 
