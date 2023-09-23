@@ -9,7 +9,7 @@ openai.api_key = secrets.gpt_api_key
 EMBEDDING_MODEL = "text-embedding-ada-002" 
 
 def get_embeddings() -> list[dict()]:
-    with open('embeddings.pkl', 'rb') as f:
+    with open('/Users/nikhileshbelulkar/Documents/smart_IVR/audio_service/audio_app/embeddings.pkl', 'rb') as f:
         data_table = pickle.load(f)
     return data_table
 
@@ -31,11 +31,11 @@ def strings_ranked_by_relatedness(
     return zipper
 
 if __name__ == "__main__":
-    question = input("Please input your query about Nikhilesh's restaruant")
     data_table = get_embeddings()
+    question = input("Please input your query about Nikhilesh's restaruant? ")
     zipped_embeddings = strings_ranked_by_relatedness(question, data_table)
     for tup in zipped_embeddings[0:10]:
-        print(tup[2])
+        print(tup[0])
     
 
 

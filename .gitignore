@@ -1,5 +1,5 @@
 # Specific to project
-audio_service/audio_app/secrets.py
+audio_service/audio_app/mysecrets.py
 audio_service/audio_app/__pycache__/
 audio_service/audio_app/audio_service/__pycache__/
 audio_service/db.sqlite3
