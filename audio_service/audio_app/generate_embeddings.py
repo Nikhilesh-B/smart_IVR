@@ -33,13 +33,10 @@ def get_texts_from_directory(directory_path):
 
 
 def generate_pickledump(filenames, text_descriptions, embeddings):
-    zipper = zip(filenames, text_descriptions, embeddings)
+    zipper = list(zip(filenames, text_descriptions, embeddings))
     pickle_dictionary = [{'filename':fname,'text_description':txt,'embedding':embed} 
                          for fname, txt, embed in zipper]
     
-    for fname, txt, embed in zipper:
-        print(fname, txt, embed)
-
     with open('embeddings.pkl', 'wb') as f:
         pickle.dump(pickle_dictionary, f)
 
