@@ -1,7 +1,7 @@
 from django.db import models
 import openai, requests
 from tenacity import retry, wait_random_exponential, stop_after_attempt
-import audio_app.secrets as secrets
+import audio_app.mysecrets as secrets
 
 openai.api_key = secrets.gpt_api_key
 GPT_MODEL = "gpt-3.5-turbo-0613"

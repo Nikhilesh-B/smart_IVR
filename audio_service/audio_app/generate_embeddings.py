@@ -1,9 +1,10 @@
 import openai
 import os 
-import pandas as pd
-import audio_app.secrets as secrets
+import mysecrets as secrets
+import pickle 
+import pprint 
 
-openai.api_key = os.getenv(secrets.gpt_api_key)
+openai.api_key = secrets.gpt_api_key
 
 def get_embeddings(array_of_texts):
     model = "text-embedding-ada-002"    
@@ -31,16 +32,19 @@ def get_texts_from_directory(directory_path):
     return texts, filenames
 
 
-def generate_dataframe(text_descriptions, embeddings, filenames):
-    df = pd.DataFrame({'filename':filenames, 'text':text_descriptions,'embedding':embeddings})
-    return df 
+def generate_pickledump(filenames, text_descriptions, embeddings):
+    zipper = zip(filenames, text_descriptions, embeddings)
+    pickle_dictionary = [{'filename':fname,'text_description':txt,'embedding':embed} 
+                         for fname, txt, embed in zipper]
+    
+    for fname, txt, embed in zipper:
+        print(fname, txt, embed)
 
-def write_dataframe(dataframe, filename):
-    dataframe.to_csv(filename, index=True)
+    with open('embeddings.pkl', 'wb') as f:
+        pickle.dump(pickle_dictionary, f)
 
 if __name__ == "__main__":
-    dir_path  = '/dummy_text'
+    dir_path  = './dummy_text'
     text_arr, filenames = get_texts_from_directory(directory_path=dir_path)
     embedding_arr = get_embeddings(text_arr)
-    generate_dataframe(text_descriptions=text_arr,embeddings=embedding_arr, filenames=filenames)
-    write_dataframe(filename='embedding_df.csv')
+    generate_pickledump(text_descriptions=text_arr,embeddings=embedding_arr, filenames=filenames)
