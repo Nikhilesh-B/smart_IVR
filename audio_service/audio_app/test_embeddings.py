@@ -43,7 +43,7 @@ def query_message(
 ) -> str:
     """Return a message for GPT, with relevant source texts pulled from a dataframe."""
     strings = [z[1] for z in zipper]
-    introduction = 'Use the below paragraphs about Nikhilesh Down Under Pizzerria to answer the subsequent question. If the answer cannot be found in the articles, write "I could not find an answer."'
+    introduction = 'Use the below paragraphs about Nikhilesh Down Under Pizzerria to answer the subsequent question answer if you were a team member at the restaurant. Respond casually as if you were talking to someone. If the answer cannot be found in the articles, write "I could not find an answer."'
     question = f"\n\nQuestion: {query}"
     message = introduction
     for string in strings:
