@@ -1,8 +1,6 @@
 import openai
-import os 
 import mysecrets as secrets
 import pickle 
-import pprint 
 import tiktoken
 from scipy import spatial
 openai.api_key = secrets.gpt_api_key
@@ -32,7 +30,7 @@ def strings_ranked_by_relatedness(
     zipper.sort(key=lambda x: x[2], reverse=True)
     return zipper
 
-def num_tokens(text: str, model: str = GPT_MODEL) -> int:
+def num_tokens(text: str, model: str = CHAT_COMPLETION_MODEL) -> int:
     """Return the number of tokens in a string."""
     encoding = tiktoken.encoding_for_model(model)
     return len(encoding.encode(text))
@@ -70,7 +68,7 @@ def ask(
     if print_message:
         print(message)
     messages = [
-        {"role": "system", "content": "You answer questions about Nikhilesh's down under restaurant"},
+        {"role": "system", "content": "You answer questions about Nikhilesh's Down Under Pizzeria"},
         {"role": "user", "content": message},
     ]
     response = openai.ChatCompletion.create(
@@ -81,21 +79,10 @@ def ask(
     response_message = response["choices"][0]["message"]["content"]
     return response_message
 
-
-
-
 if __name__ == "__main__":
     data_table = get_embeddings()
     question = input("Please input your query about Nikhilesh's restaruant? ")
     zipped_embeddings = strings_ranked_by_relatedness(question, data_table)
-    response_message = query_message(query=question,zipper=zipped_embeddings)
+    response_message = ask(query=question,zipper=zipped_embeddings)
     print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
-    print("Our response is :", response_message)
-    
-
-
-
-
-
-
-
+    print("The response provided is :", response_message)
