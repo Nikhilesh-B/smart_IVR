@@ -39,8 +39,7 @@ def query_message(
     query: str,
     zipper,
     model: str,
-    token_budget: int
-) -> str:
+    token_budget: int) -> str:
     """Return a message for GPT, with relevant source texts pulled from a dataframe."""
     strings = [z[1] for z in zipper]
     introduction = 'Use the below paragraphs about Nikhilesh Down Under Pizzerria to answer the subsequent question answer if you were a team member at the restaurant. Respond casually as if you were talking to someone. If the answer cannot be found in the articles, write "I could not find an answer."'
@@ -86,3 +85,4 @@ if __name__ == "__main__":
     response_message = ask(query=question,zipper=zipped_embeddings)
     print("XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
     print("The response provided is :", response_message)
+    

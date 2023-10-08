@@ -6,8 +6,7 @@ import json
 import requests
 from audio_app.models import Call_Processor
 import socketio
-from twilio.twiml.voice_response import VoiceResponse
-
+from twilio.twiml.voice_response import VoiceResponse, Start
 
 # Create your views here.
 sio = socketio.Client()
@@ -29,6 +28,12 @@ def voice(request):
         # Start our TwiML response
         # Read a message aloud to the caller
         resp = VoiceResponse()
+        start = Start()
+        start.stream(url=f'wss://{request.host}/stream')
+        resp.append(start)
+        resp.say('Please leave a message')
+        resp.pause(length=60)
+        print(f'Incoming call from {request.form["From"]}')
         resp.play("https://6ed0-2600-4040-56c4-9e00-1c3b-216f-8d0e-5b0f.ngrok-free.app/audio_app/supportify.mp3")
         return HttpResponse(str(resp))
     
@@ -80,4 +85,3 @@ def transcribe_audio(request):
 
     else:
         return JsonResponse({'status': 'failed', 'message': 'Only POST method is allowed'}, status=405)
-    
