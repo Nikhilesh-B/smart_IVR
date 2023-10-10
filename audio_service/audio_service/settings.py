@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-k=^+l%*jh)#9-h%j-d2$z%q6)gazokk_wawf)te_6%ja7!t4&j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['6ed0-2600-4040-56c4-9e00-1c3b-216f-8d0e-5b0f.ngrok-free.app']
+ALLOWED_HOSTS = ['mackerel-polished-nearly.ngrok-free.app']
 
 APPEND_SLASH=False
 # Application definition
@@ -36,9 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'channels'
-]
+    'django.contrib.staticfiles']
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

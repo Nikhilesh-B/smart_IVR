@@ -2,7 +2,7 @@ import pandas as pd
 from scipy import spatial
 import openai
 import os 
-import audio_app.secrets as secrets
+import audio_app.mysecrets as secrets
 
 openai.api_key = os.getenv(secrets.gpt_api_key)
 

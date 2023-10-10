@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-from channels.routing import ProtocolTypeRouter, URLRouter
+from channels import routing
 from audio_app import consumers
 
 
@@ -28,6 +28,6 @@ websocket_urlpatterns = [
     path('ws/stream/', consumers.YourConsumer.as_asgi()),
 ]
 
-application = ProtocolTypeRouter({
-    'websocket': URLRouter(websocket_urlpatterns),
+application = routing.ProtocolTypeRouter({
+    'websocket': routing.URLRouter(websocket_urlpatterns),
 })
