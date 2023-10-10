@@ -9,7 +9,7 @@ This repository structures and manages AI queries necessary for the frontend_ivr
 
 #### **Prerequisites**:
 
-- Python 3
+- Python 3.9 (will not work with higher versions of python)
 - A virtual environment tool of your choice (e.g., venv, virtualenv)
 
 #### **Installation and Setup**:
