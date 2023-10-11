@@ -28,9 +28,9 @@ def voice(request):
         # Start our TwiML response
         # Read a message aloud to the caller
         resp = VoiceResponse()
-        # start = Start()
-        # start.stream(url=f'ws://{request.get_host()}/stream')
-        # resp.append(start)
+        start = Start()
+        start.stream(url=f'ws://{request.get_host()}/stream')
+        resp.append(start)
         resp.say('Please leave a message')
         # resp.pause(length=60)
         #print(f'Incoming call from {request.form["From"]}')

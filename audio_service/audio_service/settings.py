@@ -31,6 +31,8 @@ APPEND_SLASH=False
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
+    'audio_app',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -67,7 +69,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'audio_service.wsgi.application'
-ASGI_APPLICATION = 'audio_service.routing.application'
+ASGI_APPLICATION = 'audio_service.asgi.application'
 
 
 CHANNEL_LAYERS = {
