@@ -30,12 +30,13 @@ def voice(request):
         resp = VoiceResponse()
         start = Start()
         print(f'ws://{request.get_host()}/audio_transcription')
-        start.stream(url=f'ws://{request.get_host()}/audio_transcription')
-        resp.append(start)
+        #this request isn't working
+        # start.stream(url=f'ws://{request.get_host()}/audio_app/audio_transcription')
+        # resp.append(start)
         resp.say('Please leave a message')
         resp.pause(length=3)
         print(f'Incoming call from {request.POST["From"]}')
-        return HttpResponse(str(resp), 200, {'Content-Type': 'text/xml'})
+        return HttpResponse(content=str(resp), content_type='text/xml', status=200)
     
 
 @sio.on('connect')

@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'audio_service.wsgi.application'
+# WSGI_APPLICATION = 'audio_service.wsgi.application'
 ASGI_APPLICATION = 'audio_service.asgi.application'
 
 
