@@ -5,7 +5,7 @@ from io import BytesIO
 
 # Path to the model and audio file
 model_path = '/Users/nikhileshbelulkar/Documents/smart_IVR/transcription_model/model-en'
-audio_file_path = '/Users/nikhileshbelulkar/Documents/smart_IVR/testing/audio_examples/supportify.mp3'
+audio_file_path = '/Users/nikhileshbelulkar/Documents/smart_IVR/testing/audio_examples/william_edward_sanders.mp3'
 
 
 # Load the model
