@@ -25,7 +25,7 @@ urlpatterns = [
 ]
 
 websocket_urlpatterns = [
-    path('ws/stream/', consumers.YourConsumer.as_asgi()),
+    path('ws/stream/', consumers.TranscriptionConsumer.as_asgi()),
 ]
 
 application = routing.ProtocolTypeRouter({

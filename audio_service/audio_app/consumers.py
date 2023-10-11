@@ -2,7 +2,7 @@ import json
 import vosk, base64, audioop
 from channels.generic.websocket import AsyncWebsocketConsumer
 
-class YourConsumer(AsyncWebsocketConsumer):
+class TranscriptionConsumer(AsyncWebsocketConsumer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.CL = '\x1b[0K'
@@ -15,12 +15,11 @@ class YourConsumer(AsyncWebsocketConsumer):
     async def disconnect(self, close_code):
         pass
 
-    async def stream(self, ws):
+    async def recieve(self, audio):
         """Receive and transcribe audio stream."""
         rec = vosk.KaldiRecognizer(self.model, 16000)
         while True:
-            message = ws.receive()
-            packet = json.loads(message)
+            packet = json.loads(audio)
             if packet['event'] == 'start':
                 print('Streaming is starting')
             elif packet['event'] == 'stop':
