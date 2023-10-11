@@ -23,11 +23,3 @@ urlpatterns = [
     path('audio_app/', include("audio_app.urls")),
     path('admin/', admin.site.urls),
 ]
-
-websocket_urlpatterns = [
-    path('ws/stream/', consumers.TranscriptionConsumer.as_asgi()),
-]
-
-application = routing.ProtocolTypeRouter({
-    'websocket': routing.URLRouter(websocket_urlpatterns),
-})

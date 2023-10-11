@@ -29,11 +29,11 @@ def voice(request):
         # Read a message aloud to the caller
         resp = VoiceResponse()
         start = Start()
-        start.stream(url=f'ws://{request.get_host()}/stream')
+        start.stream(url=f'ws://{request.get_host()}/audio_transcription')
         resp.append(start)
         resp.say('Please leave a message')
-        # resp.pause(length=60)
-        #print(f'Incoming call from {request.form["From"]}')
+        resp.pause(length=60)
+        print(f'Incoming call from {request.form["From"]}')
         return HttpResponse(str(resp))
     
 

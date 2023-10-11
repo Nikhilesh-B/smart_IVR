@@ -7,7 +7,8 @@ class TranscriptionConsumer(AsyncWebsocketConsumer):
         super().__init__(*args, **kwargs)
         self.CL = '\x1b[0K'
         self.BS = '\x08'
-        self.model = vosk.Model('model-en')
+        self.model_path = '/Users/nikhileshbelulkar/Documents/smart_IVR/transcription_model/model-en'
+        self.model = vosk.Model(self.model_path)
 
     async def connect(self):
         await self.accept()
