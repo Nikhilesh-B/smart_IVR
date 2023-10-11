@@ -24,17 +24,18 @@ class ServeAudio(View):
 @csrf_exempt
 def voice(request):
     """Respond to incoming phone calls with a 'Hello world' message"""
-    if request.method == 'POST' or request.method == 'GET':
+    if request.method == 'POST':
         # Start our TwiML response
         # Read a message aloud to the caller
         resp = VoiceResponse()
         start = Start()
+        print(f'ws://{request.get_host()}/audio_transcription')
         start.stream(url=f'ws://{request.get_host()}/audio_transcription')
         resp.append(start)
         resp.say('Please leave a message')
-        resp.pause(length=60)
-        print(f'Incoming call from {request.form["From"]}')
-        return HttpResponse(str(resp))
+        resp.pause(length=3)
+        print(f'Incoming call from {request.POST["From"]}')
+        return HttpResponse(str(resp), 200, {'Content-Type': 'text/xml'})
     
 
 @sio.on('connect')

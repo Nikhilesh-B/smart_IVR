@@ -11,6 +11,7 @@ class TranscriptionConsumer(AsyncWebsocketConsumer):
         self.model = vosk.Model(self.model_path)
 
     async def connect(self):
+        print("CONNECTED")
         await self.accept()
 
     async def disconnect(self, close_code):
