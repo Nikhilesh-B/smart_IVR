@@ -33,7 +33,6 @@ APPEND_SLASH=False
 INSTALLED_APPS = [
     'daphne',
     'audio_app',
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -69,8 +68,6 @@ TEMPLATES = [
     },
 ]
 
-# WSGI_APPLICATION = 'audio_service.wsgi.application'
-ASGI_APPLICATION = 'audio_service.asgi.application'
 
 
 # Database
@@ -125,3 +122,4 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DATA_UPLOAD_MAX_MEMORY_SIZE = 20971520
+ASGI_APPLICATION = 'audio_service.asgi.application'

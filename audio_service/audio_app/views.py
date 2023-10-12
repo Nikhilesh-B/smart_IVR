@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt 
 import json 
 import requests
-from llm_functionality.gpt_functionality.call_processor import Call_Processor
+from .call_processor import Call_Processor
 import socketio
 from twilio.twiml.voice_response import VoiceResponse, Start
 
