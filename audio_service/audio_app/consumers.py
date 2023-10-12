@@ -11,10 +11,11 @@ class TranscriptionConsumer(AsyncWebsocketConsumer):
         self.model = vosk.Model(self.model_path)
 
     async def connect(self):
-        print("CONNECTED")
+        print("We are connecting")
         await self.accept()
 
     async def disconnect(self, close_code):
+        print("hello")
         pass
 
     async def recieve(self, audio):
@@ -36,4 +37,5 @@ class TranscriptionConsumer(AsyncWebsocketConsumer):
                 else:
                     r = json.loads(rec.PartialResult())
                     print(self.CL + r['partial'] + self.BS * len(r['partial']), end='', flush=True)
+            await self.close()
             

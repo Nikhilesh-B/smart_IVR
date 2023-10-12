@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-k=^+l%*jh)#9-h%j-d2$z%q6)gazokk_wawf)te_6%ja7!t4&j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['mackerel-polished-nearly.ngrok-free.app']
+ALLOWED_HOSTS = ['mackerel-polished-nearly.ngrok-free.app', '127.0.0.1', 'localhost']
 
 APPEND_SLASH=False
 # Application definition
@@ -33,6 +33,7 @@ APPEND_SLASH=False
 INSTALLED_APPS = [
     'daphne',
     'audio_app',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -18,11 +18,12 @@ from audio_app.routing import websocket_urlpatterns
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'audio_service.settings')
 
 django_asgi_app = get_asgi_application()
-django_websocket_asgi_app = AllowedHostsOriginValidator(AuthMiddlewareStack(URLRouter(websocket_urlpatterns)))
 
 application = ProtocolTypeRouter(
-                                {
-                                    'http':django_asgi_app,
-                                    'websocket':django_websocket_asgi_app
-                                    }
-                                )
+    {
+        "http": django_asgi_app,
+        "websocket": AllowedHostsOriginValidator(
+            AuthMiddlewareStack(URLRouter(websocket_urlpatterns))
+        ),
+    }
+)

@@ -4,7 +4,7 @@ from django.http import HttpResponse, JsonResponse, FileResponse
 from django.views.decorators.csrf import csrf_exempt 
 import json 
 import requests
-from audio_app.models import Call_Processor
+from llm_functionality.gpt_functionality.call_processor import Call_Processor
 import socketio
 from twilio.twiml.voice_response import VoiceResponse, Start
 
@@ -29,10 +29,10 @@ def voice(request):
         # Read a message aloud to the caller
         resp = VoiceResponse()
         start = Start()
-        print(f'ws://{request.get_host()}/audio_transcription')
+        print(f'wss://{request.get_host()}/audio_transcription')
         #this request isn't working
-        # start.stream(url=f'ws://{request.get_host()}/audio_app/audio_transcription')
-        # resp.append(start)
+        start.stream(url=f'wss://{request.get_host()}/audio_app/audio_transcription')
+        resp.append(start)
         resp.say('Please leave a message')
         resp.pause(length=3)
         print(f'Incoming call from {request.POST["From"]}')
