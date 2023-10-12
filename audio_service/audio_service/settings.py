@@ -33,6 +33,7 @@ APPEND_SLASH=False
 INSTALLED_APPS = [
     'daphne',
     'audio_app',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

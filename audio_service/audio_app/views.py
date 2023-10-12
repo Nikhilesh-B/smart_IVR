@@ -15,6 +15,8 @@ form_data = None
 def index(request):
     return render(request, "audio_app/index.html")
 
+def room(request, room_name):
+    return render(request, "audio_app/room.html", {"room_name": room_name})
 
 class ServeAudio(View):
     def get(self, request, *args, **kwargs):
