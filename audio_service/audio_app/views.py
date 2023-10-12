@@ -13,7 +13,7 @@ sio = socketio.Client()
 form_data = None
 
 def index(request):
-    return HttpResponse("Hello world.")
+    return render(request, "audio_app/index.html")
 
 
 class ServeAudio(View):
